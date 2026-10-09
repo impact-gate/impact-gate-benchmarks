@@ -1,0 +1,51 @@
+{
+  "id": "04-request-enum-value-removed",
+  "title": "NewOrder.currency no longer accepts INR",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "POST /orders",
+        "kind": "request-property-enum-value-removed",
+        "detail": "currency=INR"
+      }
+    ],
+    "affected_consumers": [
+      "india-checkout"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "india-checkout",
+      "language": "go",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "POST /orders",
+          "sends": [
+            "customer_id",
+            "items",
+            "currency=INR"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "eu-checkout",
+      "language": "go",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "POST /orders",
+          "sends": [
+            "customer_id",
+            "items",
+            "currency=EUR"
+          ]
+        }
+      ]
+    }
+  ]
+}
