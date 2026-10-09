@@ -1,0 +1,45 @@
+{
+  "id": "10-success-status-code-changed",
+  "title": "POST /orders success code 201 -> 200",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Affected consumer is the one that treats only 201 as success.",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "POST /orders",
+        "kind": "response-success-status-removed",
+        "detail": "201 removed, 200 added"
+      }
+    ],
+    "affected_consumers": [
+      "india-checkout"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "india-checkout",
+      "language": "go",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "POST /orders",
+          "sends": [
+            "customer_id",
+            "items"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "admin-cli",
+      "language": "python",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders"
+        }
+      ]
+    }
+  ]
+}
