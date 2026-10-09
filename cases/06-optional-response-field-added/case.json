@@ -1,0 +1,39 @@
+{
+  "id": "06-optional-response-field-added",
+  "title": "Order.tracking_url added (optional)",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Control: additive, not breaking.",
+  "expected": {
+    "breaking": false,
+    "changes": [],
+    "affected_consumers": []
+  },
+  "consumers": [
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": true,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
