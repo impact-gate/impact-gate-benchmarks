@@ -1,0 +1,48 @@
+{
+  "id": "05-response-type-changed",
+  "title": "Order.id changes from integer to string",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /orders/{id}, GET /orders, POST /orders",
+        "kind": "response-property-type-changed",
+        "detail": "Order.id integer->string"
+      }
+    ],
+    "affected_consumers": [
+      "billing-svc"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": true,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "id",
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "email-notifier",
+      "language": "python",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /customers/{id}",
+          "reads": [
+            "email"
+          ]
+        }
+      ]
+    }
+  ]
+}
