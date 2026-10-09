@@ -1,0 +1,50 @@
+{
+  "id": "11-request-maxlength-decreased",
+  "title": "NewOrder.note maxLength 200 -> 100",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "POST /orders",
+        "kind": "request-property-max-length-decreased",
+        "detail": "note 200->100"
+      }
+    ],
+    "affected_consumers": [
+      "india-checkout"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "india-checkout",
+      "language": "go",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "POST /orders",
+          "sends": [
+            "customer_id",
+            "items",
+            "note"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "eu-checkout",
+      "language": "go",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "POST /orders",
+          "sends": [
+            "customer_id",
+            "items"
+          ]
+        }
+      ]
+    }
+  ]
+}
