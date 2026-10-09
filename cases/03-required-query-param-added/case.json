@@ -1,0 +1,44 @@
+{
+  "id": "03-required-query-param-added",
+  "title": "GET /orders gains required query param region",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /orders",
+        "kind": "request-parameter-added-required",
+        "detail": "region"
+      }
+    ],
+    "affected_consumers": [
+      "reporting-job"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "reporting-job",
+      "language": "python",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders"
+        }
+      ]
+    },
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
