@@ -1,0 +1,48 @@
+{
+  "id": "09-response-enum-value-added",
+  "title": "Order.status gains value refunded",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Consumer-sensitive: additive on the wire, but breaks consumers that decode status into a closed enum (strict_decoding=true).",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /orders/{id}, GET /orders, POST /orders",
+        "kind": "response-property-enum-value-added",
+        "detail": "status=refunded",
+        "consumer_sensitive": true
+      }
+    ],
+    "affected_consumers": [
+      "billing-svc"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": true,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
