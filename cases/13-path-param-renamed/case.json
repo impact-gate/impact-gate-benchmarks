@@ -1,0 +1,26 @@
+{
+  "id": "13-path-param-renamed",
+  "title": "Path parameter {id} renamed {orderId}",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Control: parameter rename in a path template is not breaking on the wire.",
+  "expected": {
+    "breaking": false,
+    "changes": [],
+    "affected_consumers": []
+  },
+  "consumers": [
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
