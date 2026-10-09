@@ -1,0 +1,26 @@
+{
+  "id": "07-new-operation-added",
+  "title": "POST /orders/{id}/refund added",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Control: new operation, not breaking.",
+  "expected": {
+    "breaking": false,
+    "changes": [],
+    "affected_consumers": []
+  },
+  "consumers": [
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
