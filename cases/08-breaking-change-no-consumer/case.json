@@ -1,0 +1,45 @@
+{
+  "id": "08-breaking-change-no-consumer",
+  "title": "GET /customers/{id} removed, no registered consumer uses it",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Breaking per the spec, but no listed consumer is affected. Tests that a tool does not over-warn.",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /customers/{id}",
+        "kind": "path-removed"
+      }
+    ],
+    "affected_consumers": []
+  },
+  "consumers": [
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status",
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders",
+          "reads": [
+            "total"
+          ]
+        }
+      ]
+    }
+  ]
+}
