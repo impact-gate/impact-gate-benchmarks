@@ -1,0 +1,44 @@
+{
+  "id": "01-remove-operation",
+  "title": "DELETE /orders/{id} removed",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "DELETE /orders/{id}",
+        "kind": "operation-removed"
+      }
+    ],
+    "affected_consumers": [
+      "admin-cli"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "admin-cli",
+      "language": "python",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "DELETE /orders/{id}"
+        }
+      ]
+    },
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status",
+            "total"
+          ]
+        }
+      ]
+    }
+  ]
+}
