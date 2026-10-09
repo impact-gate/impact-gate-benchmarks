@@ -1,0 +1,48 @@
+{
+  "id": "02-response-field-removed",
+  "title": "Order.customer_id removed from responses",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /orders/{id}, GET /orders, POST /orders",
+        "kind": "response-property-removed",
+        "detail": "Order.customer_id"
+      }
+    ],
+    "affected_consumers": [
+      "billing-svc"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "customer_id",
+            "total"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    }
+  ]
+}
