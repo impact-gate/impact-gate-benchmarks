@@ -1,0 +1,46 @@
+{
+  "id": "12-auth-required-added",
+  "title": "GET /orders/{id} now requires an API key",
+  "labelled_by": "maintainer hand label (synthetic spec)",
+  "note": "Consumers calling GET /orders/{id} without a key start failing.",
+  "expected": {
+    "breaking": true,
+    "changes": [
+      {
+        "operation": "GET /orders/{id}",
+        "kind": "api-security-added"
+      }
+    ],
+    "affected_consumers": [
+      "storefront-web"
+    ]
+  },
+  "consumers": [
+    {
+      "name": "storefront-web",
+      "language": "typescript",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders/{id}",
+          "reads": [
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "billing-svc",
+      "language": "java",
+      "strict_decoding": false,
+      "uses": [
+        {
+          "operation": "GET /orders",
+          "reads": [
+            "total"
+          ]
+        }
+      ]
+    }
+  ]
+}
